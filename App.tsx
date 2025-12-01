@@ -8,8 +8,6 @@ export default function App() {
   // State for the results of the roll
   const [results, setResults] = useState<number[]>([]);
 
-  //const [roll, setRoll] = useState<number | null>(null);
-
   // Roll function for D6
   const rollDice = () => {
     const newResults = Array.from(
@@ -24,6 +22,14 @@ export default function App() {
     setDiceCount((prev) => prev + 1);
   };
 
+  // Decrease dice count
+  const removeDie = () => {
+    setDiceCount((prev) => {
+      // Minimum allowable dice count is 1.
+      return prev - 1 > 0 ? prev - 1 : 1;
+    });
+  };
+
   return (
     <View
       style={{
@@ -35,6 +41,7 @@ export default function App() {
     >
       {/* Buttons to control dice */}
       <Button title="Add Die" onPress={addDie} />
+      <Button title="Remove Die" onPress={removeDie} />
       <Text style={{ fontSize: 24, marginBottom: 20 }}>D6 Roller</Text>
 
       {/* Roll button */}
