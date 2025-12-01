@@ -1,12 +1,27 @@
 import React, { useState } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, FlatList } from "react-native";
 
 export default function App() {
-  const [roll, setRoll] = useState<number | null>(null);
+  // State for how many dice to roll
+  const [diceCount, setDiceCount] = useState<number>(1);
 
-  const rollD6 = () => {
-    const result = Math.floor(Math.random() * 6) + 1;
-    setRoll(result);
+  // State for the results of the roll
+  const [results, setResults] = useState<number[]>([]);
+
+  //const [roll, setRoll] = useState<number | null>(null);
+
+  // Roll function for D6
+  const rollDice = () => {
+    const newResults = Array.from(
+      { length: diceCount },
+      () => Math.floor(Math.random() * 6) + 1
+    );
+    setResults(newResults);
+  };
+
+  // Increase dice count
+  const addDie = () => {
+    setDiceCount((prev) => prev + 1);
   };
 
   return (
@@ -18,13 +33,21 @@ export default function App() {
         padding: 16,
       }}
     >
+      {/* Buttons to control dice */}
+      <Button title="Add Die" onPress={addDie} />
       <Text style={{ fontSize: 24, marginBottom: 20 }}>D6 Roller</Text>
 
-      <Button title="Roll D6" onPress={rollD6} />
+      {/* Roll button */}
+      <Button title="Roll Dice" onPress={rollDice} />
 
-      {roll !== null && (
-        <Text style={{ fontSize: 32, marginTop: 20 }}>You Rolled: {roll}</Text>
-      )}
+      {/* Display results */}
+      <FlatList
+        data={results}
+        keyExtractor={(_, i) => i.toString()}
+        renderItem={({ item, index }) => (
+          <Text style={{ fontSize: 20 }}>{`Die ${index + 1}: ${item}`}</Text>
+        )}
+      />
     </View>
   );
 }
