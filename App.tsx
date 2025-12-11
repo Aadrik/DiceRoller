@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, Button, FlatList } from "react-native";
-import { fateChart, interpretFateRoll } from "./fateChart";
+import { interpretFateRoll } from "./fateChart";
+import FateChartSelector from "./FateChartSelector";
 
 export default function App() {
   // State for how many dice to roll
@@ -68,27 +69,11 @@ export default function App() {
         )}
       />
 
-      {/* Fate Chart Section */}
-      <Text style={{ fontSize: 24, marginVertical: 20 }}>Fate Chart</Text>
-
-      {/* Chaos Selector */}
-      <Text style={{ fontSize: 18 }}>Chaos Factor: {chaosLevel}</Text>
-      <View
-        style={{ flexDirection: "row", flexWrap: "wrap", marginVertical: 10 }}
-      >
-        {[...Array(9)].map((_, i) => (
-          <Button
-            key={i}
-            title={`${i + 1}`}
-            onPress={() => setChaosLevel(i + 1)}
-          />
-        ))}
-      </View>
-
-      {/* Odds Button */}
-      {Object.keys(fateChart).map((odds) => (
-        <Button key={odds} title={odds} onPress={() => rollFate(odds)} />
-      ))}
+      <FateChartSelector
+        chaosLevel={chaosLevel}
+        setChaosLevel={setChaosLevel}
+        rollFate={rollFate}
+      ></FateChartSelector>
 
       {/* Fate Result */}
       {fateResult && (

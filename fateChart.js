@@ -113,5 +113,7 @@ function interpretFateRoll(roll, chaos, odds) {
   return "No";
 }
 
+const fateCategories = Object.keys(fateChart);
+
 // Export for use in your app
-export { fateChart, interpretFateRoll };
+export { fateCategories, interpretFateRoll };
