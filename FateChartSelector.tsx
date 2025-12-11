@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { fateCategories } from "./fateChart.js";
 
 type FateChartSectionProps = {
@@ -14,15 +14,13 @@ export default function FateChartSectionProps({
   rollFate,
 }: FateChartSectionProps) {
   return (
-    <View>
+    <View style={styles.container}>
       {/* Fate Chart Section */}
-      <Text style={{ fontSize: 24, marginVertical: 20 }}>Fate Chart</Text>
+      <Text style={styles.title}>Fate Chart</Text>
 
       {/* Chaos Selector */}
-      <Text style={{ fontSize: 18 }}>Chaos Factor: {chaosLevel}</Text>
-      <View
-        style={{ flexDirection: "row", flexWrap: "wrap", marginVertical: 10 }}
-      >
+      <Text style={styles.chaosText}>Chaos Factor: {chaosLevel}</Text>
+      <View style={styles.chaosSelector}>
         {[...Array(9)].map((_, i) => (
           <Button
             key={i}
@@ -33,15 +31,9 @@ export default function FateChartSectionProps({
       </View>
 
       {/* Odds Button */}
-      <View
-        style={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.oddsContainer}>
         {fateCategories.map((odds) => (
-          <View key={odds} style={{ width: "45%", margin: 5 }}>
+          <View key={odds} style={styles.oddsButtonWrapper}>
             <Button key={odds} title={odds} onPress={() => rollFate(odds)} />
           </View>
         ))}
@@ -49,3 +41,31 @@ export default function FateChartSectionProps({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  chaosText: {
+    fontSize: 18,
+  },
+  chaosSelector: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginVertical: 10,
+  },
+  oddsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  oddsButtonWrapper: {
+    width: "45%",
+    margin: 5,
+  },
+});
