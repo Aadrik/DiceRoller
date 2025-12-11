@@ -24,8 +24,9 @@ A simple React Native app built with Expo that lets you roll dice and use a Fate
    cd diceroller-app
    ```
 
-## TODO
+## TODO in no particular order
 
 - Add a history to view previous rolls and results
 - Add the rest of the random generator tables IE - Character descriptors, items, actions, etc..
 - Add delving results
+- Add d4, d8, d10, d12, d20, and d100
