@@ -8,7 +8,7 @@ type FateChartSectionProps = {
   rollFate: (odds: string) => void;
 };
 
-export default function FateChartSectionProps({
+export default function FateChartSelector({
   chaosLevel,
   setChaosLevel,
   rollFate,
